@@ -1,6 +1,12 @@
+package server;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+
+/**
+ * сервер
+ */
 
 public class Server implements IConnect {
 
@@ -8,8 +14,10 @@ public class Server implements IConnect {
         new Server();
     }
 
+    //соединения складываются в ArrayList
     private final ArrayList<Connect> connections = new ArrayList<>();
 
+    //метод с серверным сокетом
     private Server() {
         System.out.println("Server running/Сервер запущен");
         try (ServerSocket serverSocket = new ServerSocket(8189)){
@@ -17,7 +25,7 @@ public class Server implements IConnect {
                 try {
                     new Connect(this, serverSocket.accept());
                 } catch (IOException e) {
-                    System.out.println("Connect exception: " + e);
+                    System.out.println("server.Connect exception: " + e);
                 }
             }
         } catch (IOException e) {
@@ -48,6 +56,6 @@ public class Server implements IConnect {
     }
 
     public void except(Connect connect, Exception e) {
-        System.out.println("Connect exception" + e);
+        System.out.println("server.Connect exception" + e);
     }
 }

@@ -1,3 +1,8 @@
+package client;
+
+import server.Connect;
+import server.IConnect;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,8 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- * мой вариант простого мессенджера на основе материалов из интернетов
- * V 0.8 (без документации и комментариев)
+ * мой вариант простого мессенджера
+ * V 0.81
+ * клиентская часть с GUI
  */
 
 public class Window extends JFrame implements ActionListener, IConnect {
@@ -17,25 +23,23 @@ public class Window extends JFrame implements ActionListener, IConnect {
     private static final int HEIGHT = 600;
 
     private final JTextArea log = new JTextArea();
-    private final JTextField nicknameField = new JTextField("юзернейм"); //потом сюда надо вставить ник пользователя отдельной функцией
+    private final JTextField nicknameField = new JTextField("Ваш никнейм");
     private final JTextField messageField = new JTextField();
 
     private Connect connection;
 
     private Window() {
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
-
         log.setEditable(false);
         log.setLineWrap(true);
         add(log, BorderLayout.CENTER);
-
         messageField.addActionListener(this);
         add(nicknameField, BorderLayout.NORTH);
         add(messageField, BorderLayout.SOUTH);
-
         setVisible(true);
 
         try {
@@ -43,7 +47,6 @@ public class Window extends JFrame implements ActionListener, IConnect {
         } catch (IOException e) {
             printMessage("Connection exception: " + e);
         }
-
     }
 
     private synchronized void printMessage(final String message) {

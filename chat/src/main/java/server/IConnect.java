@@ -1,3 +1,5 @@
+package server;
+
 public interface IConnect {
 
     void conReady(Connect connect);

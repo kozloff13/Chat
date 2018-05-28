@@ -1,7 +1,12 @@
+package server;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
 
+/**
+ * логика работы серверной части
+ */
 public class Connect {
 
     private final Socket socket;
